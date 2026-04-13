@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: '.env' });
 
+
 const db = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'mysql',
     logging: false,

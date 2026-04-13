@@ -1,43 +1,62 @@
-import nodemailer from 'nodemailer';// Para enviar correos
+import nodemailer from 'nodemailer';
 
-export async function enviarEmailConfirmacion({ nombreVendedora, email, url}) {
-    const transport = nodemailer.createTransport({
-        service:'gmail',
-        auth: {
-            user: 'marcelaguadalupe.palomar@gmail.com',
-            pass: 'zsvo qnpm xwxv grhl' //Se requiere de una contraseña para enviar correos
-        }
-    });
+const transport = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
-    await transport.sendMail({
-        from: '"NLG" <TUCORREO@gmail.com>',
-        to: email,
-        subject: "Confirma tu cuenta",
-        html: `
-        <p>Hola ${nombreVendedora}, confirma tu cuenta dando clic en el siguiente enlace:</p>
+// verificar conexión al iniciar (IMPORTANTE en Render)
+transport.verify((error, success) => {
+  if (error) {
+    console.error('❌ Error SMTP:', error);
+  } else {
+    console.log('✅ SMTP listo para enviar correos');
+  }
+});
+
+export async function enviarEmailConfirmacion({ nombreVendedora, email, url }) {
+  try {
+    console.log('📧 Enviando correo de confirmación...');
+
+    const info = await transport.sendMail({
+      from: '"NLG" <' + process.env.EMAIL_USER + '>',
+      to: email,
+      subject: "Confirma tu cuenta",
+      html: `
+        <p>Hola ${nombreVendedora}, confirma tu cuenta:</p>
         <a href="${url}">Confirmar cuenta</a>
-    `
+      `
     });
+
+    console.log('✅ Correo enviado:', info.messageId);
+
+  } catch (error) {
+    console.error('❌ Error enviando confirmación:', error);
+  }
 }
 
 export async function enviarEmailRecuperacion(correo, url) {
-  const transport = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'marcelaguadalupe.palomar@gmail.com',
-        pass: 'zsvo qnpm xwxv grhl' //Se requiere de una contraseña para enviar correos
-    }
-  });
+  try {
+    console.log('📧 Enviando correo de recuperación...');
 
-  await transport.sendMail({
-    from: '"NLG" <TUCORREO@gmail.com>',
-    to: correo,
-    subject: "Recupera tu contraseña",
-    html: `
-      <p>Hola, has solicitado restablecer tu contraseña.</p>
-      <p>Da clic en el siguiente enlace para crear una nueva contraseña. El enlace expirará en 1 hora:</p>
-      <a href="${url}">Restablecer contraseña</a>
-      <p>Si no solicitaste este cambio, ignora este correo.</p>
-    `
-  });
+    const info = await transport.sendMail({
+      from: '"NLG" <' + process.env.EMAIL_USER + '>',
+      to: correo,
+      subject: "Recupera tu contraseña",
+      html: `
+        <p>Restablecer contraseña:</p>
+        <a href="${url}">Crear nueva contraseña</a>
+      `
+    });
+
+    console.log('✅ Correo enviado:', info.messageId);
+
+  } catch (error) {
+    console.error('❌ Error enviando recuperación:', error);
+  }
 }
