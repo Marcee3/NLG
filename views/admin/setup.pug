@@ -1,0 +1,52 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Novias Los Gatitos | #{titulo}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        header 
+            .logo 
+                img(src="/img/logo.png", alt="Novias Los Gatitos" class="img-logo" width="70")
+                .txtTitle   
+                    h2 Novias Los Gatitos
+            .navBar
+                .dropdown
+                    button.dropBtn Medidas
+                    .dropContent
+                        a(href="/errorServer") Vista Mensual
+                        a(href="/admin/dates") Vista por días
+
+                .dropdown
+                    button.dropBtn Entregas
+                    .dropContent
+                        a(href="/errorServer") Vista Mensual
+                        a(href="/admin/dates") Vista por días
+
+                a(href="/admin/register") Agendar citas
+                a(href="/logout") Cerrar sesión
+                a(href="/") Volver a inicio 
+        main 
+            .content 
+                h2 Opciones 
+                a(href="/auth/contraPag") Cambiar contraseña
+                #first-section.first-section   
+                    h2 Información de uso 
+                    p Para revisar citas, da clic en el apartado de "Medidas" o "Entregas" y en "Vista por días"
+                    p Para agregar una cita, ve al apartado de "Agendar citas" y completa los campos 
+                    p Si quieres modificar una cita, en el apartado para revisar las citas tiene botones para poder editar o eliminar la cita
+                #loader.loader
+                    p Cargando datos...
+                .dashboard 
+                    .dash 
+                        h3 Clientes 
+                        p#totalCitas
+                    .dash 
+                        h3 Citas
+                        ul#listaClientes 
+                    .dash 
+                        h3 Total
+                        ul#listaCitas
+
+        script(type="module" src="/js/dashboard.js") 

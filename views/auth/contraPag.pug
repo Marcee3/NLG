@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Novias Los Gatitos | #{titulo}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        header 
+            .logo 
+                img(src="/img/logo.png", alt="Novias Los Gatitos" class="img-logo" width="70")
+                .txtTitle   
+                    h2 Novias Los Gatitos
+            .navBar
+                a(href="/logout") Cerrar sesión y volver a inicio
+        main 
+            .content 
+                form(action="/auth/contraPag", method="post" id="formLogin") 
+                    div 
+                        label(for="oldContrasena") Contraseña Actual
+                        input(type="password" placeholder="Contraseña Actual" name="oldContrasena" required)
+                    
+                    div 
+                        label(for="newContrasena") Nueva Contraseña
+                        input(type="password" placeholder="Contraseña nueva" name="newContrasena" required pattern=".{6,}")
+
+                    div 
+                        label(for="confirmarContrasena") Confirmar nueva contraseña
+                        input(type="password" name="confirmarContrasena" required)
+
+                    input(type="submit", value="Cambiar contraseña")
+
+                    p(id="mensajeError")
+    
+    script(type="module" src="/js/app.js")

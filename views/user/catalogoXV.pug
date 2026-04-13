@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Novias Los Gatitos | #{titulo}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        header 
+            .logo 
+                img(src="/img/logo.png", alt="Novias Los Gatitos" class="img-logo" width="70")
+                .txtTitle   
+                    h2 Novias Los Gatitos
+            .navBar 
+                .dropdown
+                    button.dropBtn Catálogos
+                    .dropContent
+                        a(href="/user/catalogoVN") Novias 
+                        a(href="/user/catalogoXV") XV
+                a(href="/") Página principal 
+ 
+        main 
+            .content 
+                #carousel.carousel 
+                    .carousel-track
+                        each item in imagenes || []
+                            .carousel-slide 
+                                img(src=item, alt="Vestido", loading="lazy")
+                    button.carousel-btn.prev <
+                    button.carousel-btn.next >
+
+                    .carousel-indicators           
+    script(type="module" src="/js/carousel.js") 
+                    

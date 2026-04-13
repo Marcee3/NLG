@@ -1,0 +1,41 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Novias Los Gatitos | #{titulo}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        header 
+            .logo 
+                img(src="/img/logo.png", alt="Novias Los Gatitos" class="img-logo" width="70")
+                .txtTitle   
+                    h2 Novias Los Gatitos
+            .navBar
+                a(href="/") Regresar
+                a(href="/auth/login") Iniciar Sesion
+        main 
+            .content 
+                form(action="/auth/registro", method="post" id="formLogin") 
+                    div 
+                        label(for="nombreVendedora") Vendedora 
+                        input(type="text" placeholder="Nombre vendedora" name="nombreVendedora" required)
+                    div 
+                        label(for="telefonoVendedora") Vendedora 
+                        input(type="text" placeholder="Telefono vendedora" name="telefonoVendedora" required)
+                    div 
+                        label(for="correo") Correo 
+                        input(type="email" placeholder="Correo" name="correo" required)
+                    div 
+                        label(for="contrasena") Contraseña
+                        input(type="password" placeholder="Contraseña" name="contrasena" id="contrasena" required pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres")
+                    div 
+                        label(for="confirmarContra") Confirmar contraseña
+                        input(type="password" name="confirmar" id="confirmar" placeholder="Confirmar contraseña" required)
+                    div 
+                        label Para iniciar sesión, contesta lo siguiente
+                        p ¿Cuánto es 10+6+24? 
+                        input(type="number", name="preguntaLogica" id="preguntaLogica" required)
+                    input(type="submit", value="Registrar")
+                    p(id="mensajeError")
+    script(type="module" src="/js/app.js")

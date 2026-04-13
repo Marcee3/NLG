@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Novias Los Gatitos | #{titulo}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        header 
+            .logo 
+                img(src="/img/logo.png", alt="Novias Los Gatitos" class="img-logo" width="70")
+                .txtTitle   
+                    h2 Novias Los Gatitos
+            .navBar
+                a(href="/") Regresar
+
+        main 
+            .content 
+                h1 #{titulo}
+
+                if mensaje
+                    p= mensaje
+
+                if error
+                    p(style="color: red") Error al confirmar tu cuenta
+
+                if !error
+                    a(href="/login") Ir a iniciar sesión
+
+    script(type="module" src="/js/app.js")

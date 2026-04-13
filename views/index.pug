@@ -1,0 +1,55 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Novias Los Gatitos | #{titulo}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        header 
+            .logo 
+                img(src="/img/logo.png", alt="Novias Los Gatitos" class="img-logo" width="70")
+                .txtTitle   
+                    h2(data-i18n="empresa") Novias Los Gatitos
+            .navBar 
+                a(href="#first-section" data-i18n="nosotros") Nosotros 
+
+                .dropdown
+                    button.dropBtn(data-i18n="catalogos") Catálogos
+                    .dropContent
+                        a(href="/user/catalogoVN" data-i18n="novias") Novias 
+                        a(href="/user/catalogoXV" data-i18n="xv") XV 
+
+                a(href="#second-section" data-i18n="contacto") Contacto 
+                a(href="/auth/registrar" data-i18n="login") Iniciar 
+
+                //button.btn#toggleIdioma Español
+ 
+        main 
+            .content 
+                #first-section.section-container  
+                    section.reveal 
+                        h2(data-i18n="nosotros") Nosotros
+                        p(data-i18n="nosotros_desc1") Somos una empresa para novias y quinceañeras.
+                        p(data-i18n="nosotros_desc2") Queremos hacer realidad tus sueños ofreciendote una gran variedad de diseños. 
+                        p(data-i18n="nosotros_desc3") Sabemos que tu vestido tiene que ser único, y por eso, te ofrecemos una amplia variedad de diseños exclusivos que se adaptan a tu estilo y personalidad. Desde vestidos clásicos hasta propuestas modernas, tenemos justo lo que necesitas para brillar.
+                    section.reveal  
+                        h2(data-i18n="mision") Misión 
+                        p(data-i18n="mision_desc") Ser una empresa líder en la venta de vestidos de novia, XV años, fiesta, accesorios de la más alta calidad y diseños a la vanguardia, así mismo brindándoles un servicio especializado para esos momentos inolvidables de los nuestros clientes.
+                    section.reveal 
+                        h2(data-i18n="vision") Visión 
+                        p(data-i18n="vision_desc") Es una empresa que se enfoca en hacer realidad los sueños de las jóvenes, ofreciendo experiencia, atención cálida y gran variedad de propuestas. 
+                    section.reveal 
+                        h2(data-i18n="ubicacion") Ubicación 
+                        h3(data-i18n="ubicacion_text") Nos encontramos aqui:
+                            .location 
+                                iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.3010701630296!2d-102.295442!3d21.8844793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ee637af8d3c1%3A0xb1ce55fc80921b09!2sNovias%20los%20gatitos!5e0!3m2!1ses-419!2smx!4v1755327816801!5m2!1ses-419!2smx' width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade')
+                #second-section.second-section  
+                    h2(data-i18n="contacto") Contacto 
+                    a.card(href="https://www.facebook.com/noviaslosgatitoss/?locale=es_LA")  Facebook
+                    a.card(href="https://share.google/JcUfUhkKHWsCaW4zq") Instagram 
+                    a.card(href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR473tBBzODSEYWgURT_YLl-MjmdPAanLOU_A&s") WhatsApp
+                    br
+                    button.btn#toggleTema Cambiar tema
+        script(type="module" src="/js/ui.js") 
+        script(type="module", src="/js/animations.js") 

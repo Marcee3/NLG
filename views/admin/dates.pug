@@ -1,0 +1,98 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Novias Los Gatitos | #{titulo}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        header 
+            .logo 
+                img(src="/img/logo.png", alt="Novias Los Gatitos" class="img-logo" width="70")
+                .txtTitle   
+                    h2 Novias Los Gatitos
+            .navBar
+                .dropdown
+                    button.dropBtn Medidas
+                    .dropContent
+                        a(href="/errorServer") Vista Mensual
+                        a(href="/admin/dates") Vista por días
+
+                .dropdown
+                    button.dropBtn Entregas
+                    .dropContent
+                        a(href="/errorServer") Vista Mensual
+                        a(href="/admin/dates") Vista por días
+
+                a(href="/admin/setup") Regresar
+        main 
+            .content
+                #listDates 
+                    h2 Citas pendientes
+                    form#formBuscar(method="GET")
+                        input(type="text", id="buscarInput", placeholder="Buscar cliente")
+
+                        select(id="tipoFiltro")
+                            option(value="") Todos
+                            option(value="Medidas") Medidas
+                            option(value="Entrega") Entrega
+                        
+                        select(id="ordenFiltro")
+                            option(value="") Sin ordenar 
+                            option(value="vendedora") Vendedora
+
+                        button(type="submit") Buscar
+                        
+                    ul#dates 
+                    #modalUpdate.modalUpdate(style="display:none;")
+                        .modalContent 
+                            h2 Editar Cita 
+                            form#formUpdate
+                                input(type="hidden", id="editId")
+                                div
+                                    label(for="nombreCliente") Nombre del cliente
+                                    input(type="text", name="nombreCliente", id="cliente", required)
+
+                                div
+                                    label(for="telefonoCliente") Teléfono
+                                    input(type="tel", name="telefonoCliente", id="telefono")
+
+                                div
+                                    label(for="codigoVestido") Código del Vestido
+                                    input(type="text", name="codigoVestido", id="codigo", required)
+
+                                div
+                                    label(for="fechaEvento") Fecha del Evento
+                                    input(type="date", name="fechaEvento", id="fechaEvento", required)
+                                
+                                div
+                                    label(for="medidasCita") Fecha de Medidas
+                                    input(type="date", name="medidasCita", id="medidasCita", required)
+                                
+                                div
+                                    label(for="entregasCita") Fecha de Entrega
+                                    input(type="date", name="entregasCita", id="entregasCita", required)
+
+                                div
+                                    label(for="hora") Hora
+                                    select(name="hora", id="hora", required)
+                                        option(value="") Seleccione una hora
+                                        option(value="10:00") 10:00 AM
+                                        option(value="11:00") 11:00 AM
+                                        option(value="12:00") 12:00 PM
+                                        option(value="13:00") 1:00 PM
+                                        option(value="14:00") 2:00 PM
+                                        option(value="15:00") 3:00 PM
+                                        option(value="16:00") 4:00 PM
+                                        option(value="17:00") 5:00 PM
+
+                                div
+                                    label(for="id_Vendedora") Vendedora
+                                    select(name="id_Vendedora" id="id_Vendedora", required)
+                                        option(value="") Seleccione una vendedora
+                                        each vendedora in vendedoras
+                                            option(value=vendedora.id_Vendedora)= vendedora.nombreVendedora 
+                                button(type="submit") Guardar Cambios
+                                button(type="button", id="cerrarModal") Cancelar
+        script(type="module" src="/js/ui.js") 
+        script(type="module" src="/js/app.js") 
