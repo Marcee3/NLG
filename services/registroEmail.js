@@ -1,17 +1,24 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// 🔥 FORZAR IPv4 (ARREGLA ERROR ENETUNREACH EN RENDER)
+dns.setDefaultResultOrder('ipv4first');
 
 const transport = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
+  port: 587, // 🔥 más estable en servidores cloud
+  secure: false, // 🔥 obligatorio con puerto 587
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
-// verificar conexión al iniciar (IMPORTANTE en Render)
-transport.verify((error, success) => {
+// Verificar conexión SMTP al iniciar
+transport.verify((error) => {
   if (error) {
     console.error('❌ Error SMTP:', error);
   } else {
@@ -24,7 +31,7 @@ export async function enviarEmailConfirmacion({ nombreVendedora, email, url }) {
     console.log('📧 Enviando correo de confirmación...');
 
     const info = await transport.sendMail({
-      from: '"NLG" <' + process.env.EMAIL_USER + '>',
+      from: `"NLG" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Confirma tu cuenta",
       html: `
@@ -33,10 +40,12 @@ export async function enviarEmailConfirmacion({ nombreVendedora, email, url }) {
       `
     });
 
-    console.log('✅ Correo enviado:', info.messageId);
+    console.log('✅ Correo enviado correctamente:', info.messageId);
+    return true;
 
   } catch (error) {
     console.error('❌ Error enviando confirmación:', error);
+    return false;
   }
 }
 
@@ -45,7 +54,7 @@ export async function enviarEmailRecuperacion(correo, url) {
     console.log('📧 Enviando correo de recuperación...');
 
     const info = await transport.sendMail({
-      from: '"NLG" <' + process.env.EMAIL_USER + '>',
+      from: `"NLG" <${process.env.EMAIL_USER}>`,
       to: correo,
       subject: "Recupera tu contraseña",
       html: `
@@ -54,9 +63,11 @@ export async function enviarEmailRecuperacion(correo, url) {
       `
     });
 
-    console.log('✅ Correo enviado:', info.messageId);
+    console.log('✅ Correo enviado correctamente:', info.messageId);
+    return true;
 
   } catch (error) {
     console.error('❌ Error enviando recuperación:', error);
+    return false;
   }
 }
